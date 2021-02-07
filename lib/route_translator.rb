@@ -77,4 +77,8 @@ module RouteTranslator
     locale = params[config.locale_param_key]&.to_sym
     locale if I18n.available_locales.include?(locale)
   end
+
+  def locale_from_request(request)
+    locale_from_params(request.params) || RouteTranslator::Host.locale_from_host(request.host)
+  end
 end
